@@ -1,0 +1,80 @@
+Rocky Linux 9.2にBIND 9.16.23をインストールしたときの手順
+
+なお、BINDは権威サーバー（DNSコンテンツサーバー）としてのみ使用する
+
+◆OSの確認
+# cat /etc/redhat-release
+Rocky Linux release 9.2 (Blue Onyx)
+
+◆BINDのインストール
+# dnf install bind
+
+◆BINDバージョンの確認
+# named -v
+BIND 9.16.23-RH (Extended Support Version) <id:fde3b1f>
+
+◆BINDの起動及び確認
+# systemctl start named
+#
+# systemctl status named
+● named.service - Berkeley Internet Name Domain (DNS)
+     Loaded: loaded (/usr/lib/systemd/system/named.service; enabled; preset: disabled)
+     Active: active (running) （以下、省略）
+
+◆BINDの自動起動設定及び確認
+# systemctl enable named
+Created symlink /etc/systemd/system/multi-user.target.wants/named.service → /usr/lib/systemd/system/named.service.
+#
+# systemctl is-enabled named
+enabled
+
+
+◆/etc/named.confの設定
+# diff -u /etc/named.conf.bak /etc/named.conf
+--- /etc/named.conf.bak    2023-10-13 04:23:13.000000000 +0900
++++ /etc/named.conf     2023-10-21 18:19:24.634759130 +0900
+@@ -8,7 +8,7 @@
+ //
+
+ options {
+-       listen-on port 53 { 127.0.0.1; };
++       listen-on port 53 { 127.0.0.1; XXX.XXX.XXX.XXX; };　　　　←★XXX.XXX.XXX.XXXにサーバーのIPを記載
+        listen-on-v6 port 53 { ::1; };
+        directory       "/var/named";
+        dump-file       "/var/named/data/cache_dump.db";
+@@ -16,7 +16,7 @@
+        memstatistics-file "/var/named/data/named_mem_stats.txt";
+        secroots-file   "/var/named/data/named.secroots";
+        recursing-file  "/var/named/data/named.recursing";
+-       allow-query     { localhost; };
++       allow-query     { 0.0.0.0/0; };　　　　←★DNS問い合わせをインターネットから許可
+
+        /*
+         - If you are building an AUTHORITATIVE DNS server, do NOT enable recursion.
+@@ -28,7 +28,7 @@
+           attacks. Implementing BCP38 within your network would greatly
+           reduce such attack surface
+        */
+-       recursion yes;
++       recursion no;　　　　←★DNSキャッシュサーバーとしての問い合わせは拒否
+
+        dnssec-validation yes;
+
+@@ -54,6 +54,11 @@
+        file "named.ca";
+ };
+
++zone "hogehoge.foo" IN {　　　　←★zone名にhogehoge.fooを使用（実際の環境に合わせる）
++       type master;
++       file "hogehoge.foo.zones";　　　　←★zoneファイル用のファイル名を記載（実際の環境に合わせる）
++};
++
+ include "/etc/named.rfc1912.zones";
+ include "/etc/named.root.key";
+
+◆zoneファイルの作成
+※書き方は省略
+
+◆BIND再起動
+# systemctl restart named
+
