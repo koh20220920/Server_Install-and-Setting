@@ -15,9 +15,7 @@ ApacheでSSLを使うためmod_sslをインストールします。
 参考）Let's Encryptのサーバー証明書作成の公式ページ
 https://certbot.eff.org/
 
-
 ※sudo権限のユーザーで実行しろと書かれているので以下のコマンドはrootユーザーを使わずに実施します。
-
 $ sudo dnf install epel-release
 $
 $ sudo dnf upgrade
@@ -32,5 +30,4 @@ $ sudo snap install --classic certbot
 $
 $ sudo ln -s /snap/bin/certbot /usr/bin/certbot
 $
-$ sudo certbot --apache
-↑のコマンドでサーバー証明書の作成だけでなく設定もしてくれます。（Apacheのconfigを修正してくれます）
+$ sudo certbot --apache　　　　←★左のコマンドでサーバー証明書の作成だけでなく設定もしてくれます。（Apacheのconfigを修正してくれます）
