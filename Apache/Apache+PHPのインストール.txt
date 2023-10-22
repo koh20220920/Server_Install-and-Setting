@@ -1,0 +1,42 @@
+◆OSのバージョン確認
+# cat /etc/redhat-release
+Rocky Linux release 9.2 (Blue Onyx)
+#
+
+◆Apacheのインストール
+# dnf install httpd
+#
+
+◆Apacheのバージョン確認
+# httpd -v
+Server version: Apache/2.4.53 (Rocky Linux)
+Server built:   Apr 28 2023 00:00:00
+#
+
+◆PHPのインストール
+# dnf install php
+#
+
+◆PHPのバージョン確認
+# php -v
+PHP 8.0.30 (cli) (built: Aug  3 2023 17:13:08) ( NTS gcc x86_64 )
+Copyright (c) The PHP Group
+Zend Engine v4.0.30, Copyright (c) Zend Technologies
+    with Zend OPcache v8.0.30, Copyright (c), by Zend Technologies
+#
+
+◆Apacheの起動及び自動起動設定
+# systemctl start httpd
+#
+# systemctl enable httpd
+Created symlink /etc/systemd/system/multi-user.target.wants/httpd.service → /usr/lib/systemd/system/httpd.service.
+#
+
+◆PHPの動作確認
+ドキュメントルートに phpinfo.phpを置いてブラウザでアクセス
+phpinfo.phpについては以下を参照
+https://github.com/koh20220920/Server_Install-and-Setting/blob/main/Apache/php%E3%81%AE%E5%8B%95%E4%BD%9C%E7%A2%BA%E8%AA%8D.txt
+
+◆コメント
+dnf使うと簡単ですね。
+以前はもう少し手間が掛かったような気がしますが・・・
