@@ -25,9 +25,9 @@ mysql> select * from user;
 で、よく見るとlocalhostのrootユーザのpassword欄が空欄になっています。
 以下のコマンドでパスワードを設定します。
 
-書式）set password for root@”localhost”=password(‘設定するパスワード’);
+書式）set password for root@"localhost"=password('設定するパスワード');
 例）パスワードを zaq12wsx に設定する場合
-mysql> set password for root@”localhost”=password(‘zaq12wsx’);
+mysql> set password for root@'localhost'=password('zaq12wsx');
 
 localhostのrootユーザのパスワード欄が埋まっていることを確認します。
 
