@@ -1,0 +1,8 @@
+◆証明書の確認
+openssl x509 -text -noout -in [証明書のファイル名]
+
+◆CSRの確認
+openssl req -text -noout -in [CSRのファイル名]
+
+◆秘密鍵の確認
+openssl rsa -text -noout -in [秘密鍵のファイル名]
