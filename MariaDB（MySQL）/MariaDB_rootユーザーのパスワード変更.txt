@@ -1,0 +1,54 @@
+mysqlはインストール直後はどういうわけかrootユーザにパスワードが掛かっていません。
+なので始めにパスワードを設定します。
+
+# mysql -u root
+
+mysql> のプロンプトが無事に表示されましたか？
+
+表示されたと言うことはノンパスでmysqlのrootユーザにログインできたということです。
+
+ちょっと確認
+mysql> show databases;
+mysql> connect mysql;
+mysql> show tables;
+mysql> select * from user;
+
+ぐちゃぐちゃで見づらいかと思います。以下のコマンドを実行します。
+
+mysql> pager less -i -n -S
+
+もう一度先ほどのコマンドを実行します。
+
+mysql> select * from user;
+
+今度は見やすいかと思います。
+で、よく見るとlocalhostのrootユーザのpassword欄が空欄になっています。
+以下のコマンドでパスワードを設定します。
+
+書式）set password for root@”localhost”=password(‘設定するパスワード’);
+例）パスワードを zaq12wsx に設定する場合
+mysql> set password for root@”localhost”=password(‘zaq12wsx’);
+
+localhostのrootユーザのパスワード欄が埋まっていることを確認します。
+
+mysql> select * from mysql.user;
+
+exitで抜けます。
+
+mysql> exit
+
+ログイン確認をします。
+
+# myql -u root
+
+先ほどと同じコマンドですが以下のエラーが出ます。
+
+ERROR 1045 (28000): Access denied for user ‘root’@’localhost’ (using password: NO)
+
+今度は以下のようにします。
+
+# mysql -u root -p
+
+Enter password: が表示されますので先ほど設定したパスワードを入力します。
+
+mysql> のプロンプトが表示されて無事にログインできればOKです。
