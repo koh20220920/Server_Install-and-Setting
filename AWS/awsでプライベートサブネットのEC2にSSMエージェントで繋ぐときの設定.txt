@@ -1,0 +1,24 @@
+awsでプライベートサブネットのEC2にSSMエージェントで繋ぐときの設定
+
+◆前提条件
+・対象EC2にSSMエージェントがインストールされていること
+（AmazonLinuxだとデフォルトでインストールされています）
+
+・ログイン元のPCにaws cliがインストール及びアクセスキーが設定されていること
+
+◆手順
+1.VPCエンドポイントとして以下を設定
+com.amazonaws.ap-northeast-2.ssm
+com.amazonaws.ap-northeast-2.ssmmessages
+com.amazonaws.ap-northeast-2.ec2messages
+
+2.対象EC2にSSM用ロールを付与
+とりあえずログインしたいと言うことであればSSMフル権限の「AmazonSSMFullAccess」を付与します。
+※カスタマイズすることによってログイン先インスタンスの指定（制限）などができます。
+
+3.ログイン元のWindowsPCから以下のawsコマンドを実行
+aws ssm start-session –target [インスタンスID] –document-name AWS-StartPortForwardingSession –parameters portNumber=”22″,localPortNumber=”10022″
+
+4.TeraTermなどでログイン先として以下を指定してログイン
+ログイン先ホスト：localhost
+ポート：10022
