@@ -1,7 +1,9 @@
 mysqlはインストール直後はどういうわけかrootユーザにパスワードが掛かっていません。
 なので始めにパスワードを設定します。
 
-# mysql -u root
+OSに一般ユーザーでログインします。
+以下のコマンドを実行します。
+$ mysql -u root
 
 mysql> のプロンプトが無事に表示されましたか？
 
@@ -22,33 +24,33 @@ mysql> pager less -i -n -S
 mysql> select * from user;
 
 今度は見やすいかと思います。
-で、よく見るとlocalhostのrootユーザのpassword欄が空欄になっています。
+で、よく見るとlocalhostのrootユーザのpassword欄が空欄になっています。（最近は invalidと表示されるようです）
 以下のコマンドでパスワードを設定します。
 
 書式）set password for root@"localhost"=password('設定するパスワード');
 例）パスワードを zaq12wsx に設定する場合
-mysql> set password for root@'localhost'=password('zaq12wsx');
+mysql> set password for root@"localhost"=password('zaq12wsx');
 
-localhostのrootユーザのパスワード欄が埋まっていることを確認します。
-
+以下のコマンドでlocalhostのrootユーザのパスワード欄が長い英数字になっていることを確認します。
 mysql> select * from mysql.user;
 
 exitで抜けます。
-
 mysql> exit
 
-ログイン確認をします。
-
-# myql -u root
+ログイン確認します。
+$ myql -u root
 
 先ほどと同じコマンドですが以下のエラーが出ます。
-
-ERROR 1045 (28000): Access denied for user ‘root’@’localhost’ (using password: NO)
+ERROR 1698 (28000): Access denied for user 'root'@'localhost'
 
 今度は以下のようにします。
-
 # mysql -u root -p
 
 Enter password: が表示されますので先ほど設定したパスワードを入力します。
 
 mysql> のプロンプトが表示されて無事にログインできればOKです。
+
+◆補足
+いつからか知りませんが、OSにrootユーザーでログインしているとMariaDBのrootユーザーにはノンパスでログインできるようです。
+正確には、ログインしているOSユーザーと同じMariaDBユーザーにはノンパスでログインできる仕様のようです。
+unix_socket authenticationという機能が追加されたためです。このせいで少しハマった。笑
