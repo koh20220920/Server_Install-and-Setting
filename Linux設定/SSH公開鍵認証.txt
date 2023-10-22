@@ -1,0 +1,54 @@
+パスワードを入力しないでログインできるSSH公開鍵認証の設定です。
+
+ログイン元のLinuxサーバーとログイン先のLinuxサーバーに設定をします。
+
+◆環境
+ログイン元：サーバーA（IP：192.168.0.1）のtest1ユーザー
+ログイン先：サーバーB（IP：192.168.0.2）のtest2ユーザー
+
+◆ログイン元サーバーAの設定
+test1ユーザーでログインします
+
+.sshディレクトリを作成します。（既に作成されていれば不要です）
+$ mkdir ~/.ssh
+$ chmod 700 ~/.ssh
+
+鍵の作成
+$ cd ~/.ssh
+$ ssh-keygen
+Generating public/private rsa key pair.
+Enter file in which to save the key (/home/test1/.ssh/id_rsa):　　　　←★エンターキーを押します
+Enter passphrase (empty for no passphrase):　　　　←★パスワードを決める場合は入力します。今回はパスワードなしのため何も入力しないでエンターキーを押します。
+Enter same passphrase again:　　　　←★パスワードの確認なので何も入力しないでエンターキーを押します。
+以下、省略
+
+$ ll ~/.ssh
+以下のようにid_rsa（秘密鍵）とid_rsa.pub（公開鍵）が作成されます
+-rw-------  1 test1 test1 2610 10月 22 20:20 id_rsa　　　　←★パーミッションが所有者のみに付与されていることを確認します。グループや他者に付与されていたら変更します。
+-rw-r--r--  1 test1 test1  577 10月 22 20:20 id_rsa.pub
+-rw-r--r--. 1 test1 test1  175  9月 13 10:56 known_hosts
+
+$ cat id_rsa.pub
+公開鍵が表示されます。長いけど1行です。
+
+◆ログイン先Linuxサーバーの設定
+test2ユーザーでログインします
+
+.sshディレクトリを作成します。（既に作成されていれば不要です）
+$ mkdir ~/.ssh
+$ chmod 700 ~/.ssh
+$ cd ~/.ssh
+$ vi authorized_keys
+先ほど表示した公開鍵の中身を貼ります。
+1行なので余計な改行が入らないようにしてください。
+※別の方法としてファイルをSCPなどでコピーする方法もあります。
+
+$ chmod 600 authorized_keys
+
+◆動作確認
+サーバーAにtest1ユーザーでログインします。
+
+以下のコマンドでサーバーBのtest2ユーザーにログインします。
+$ ssh test2@192.168.0.2
+ノンパスでログインできればOKです。
+
