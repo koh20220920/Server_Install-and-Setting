@@ -16,11 +16,9 @@ mysql> show tables;
 mysql> select * from user;
 
 ぐちゃぐちゃで見づらいかと思います。以下のコマンドを実行します。
-
 mysql> pager less -i -n -S
 
 もう一度先ほどのコマンドを実行します。
-
 mysql> select * from user;
 
 今度は見やすいかと思います。
