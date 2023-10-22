@@ -1,0 +1,36 @@
+Let's Encryptによるサーバー証明書の作成
+
+OS：RockyLinux9
+WEB：Apache（dnfでインストール）
+
+◆mod_sslのインストール
+ApacheでSSLを使うためmod_sslをインストールします。
+# dnf install mod_ssl
+
+◆バーチャルホストの設定
+サーバー証明書を作成したいFQDNのバーチャルホストを作成します。
+（手順省略）
+
+◆サーバー証明書の作成
+参考）Let's Encryptのサーバー証明書作成の公式ページ
+https://certbot.eff.org/
+
+
+※sudo権限のユーザーで実行しろと書かれているので以下のコマンドはrootユーザーを使わずに実施します。
+
+$ sudo dnf install epel-release
+$
+$ sudo dnf upgrade
+$
+$ sudo yum install snapd
+$
+$ sudo systemctl enable --now snapd.socket
+$
+$ sudo dnf remove certbot　　　　←★certbotはインストールしていないのでこの行を飛ばしたら次の行でエラーが出たため、この行を実行したらエラーがでませんでした。
+$
+$ sudo snap install --classic certbot
+$
+$ sudo ln -s /snap/bin/certbot /usr/bin/certbot
+$
+$ sudo certbot --apache
+↑のコマンドでサーバー証明書の作成だけでなく設定もしてくれます。（Apacheのconfigを修正してくれます）
