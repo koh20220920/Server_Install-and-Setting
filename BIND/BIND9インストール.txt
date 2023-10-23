@@ -39,7 +39,7 @@ enabled
 
  options {
 -       listen-on port 53 { 127.0.0.1; };
-+       listen-on port 53 { 127.0.0.1; XXX.XXX.XXX.XXX; };　　　　←★XXX.XXX.XXX.XXXにサーバーのIPを記載
++       listen-on port 53 { 127.0.0.1; XXX.XXX.XXX.XXX; };　　　　←★XXX.XXX.XXX.XXXにサーバーのIPを記載。AWSのEC2を使用している場合はプライベートIPを記載。
         listen-on-v6 port 53 { ::1; };
         directory       "/var/named";
         dump-file       "/var/named/data/cache_dump.db";
