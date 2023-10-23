@@ -1,5 +1,5 @@
 その他のSSHの設定についてです。
-いずれも /etc/ssh/sshd_configで以下の変更します。
+いずれも /etc/ssh/sshd_configで以下を変更します。
 
 ◆パスワード認証拒否
 PasswordAuthentication no
