@@ -1,0 +1,14 @@
+その他のSSHの設定についてです。
+いずれも /etc/ssh/sshd_configで以下の変更します。
+
+◆パスワード認証拒否
+PasswordAuthentication no
+
+◆rootユーザーログイン拒否
+PermitRootLogin no
+
+◆公開鍵認証許可
+PubkeyAuthentication yes
+
+◆公開鍵登録ファイル
+AuthorizedKeysFile      .ssh/authorized_keys
