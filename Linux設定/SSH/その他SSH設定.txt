@@ -13,6 +13,7 @@ PubkeyAuthentication yes
 
 ◆公開鍵登録ファイル
 AuthorizedKeysFile      .ssh/authorized_keys
+※ログイン先ユーザーの上記のファイルに公開鍵を登録します。
 
 ◆SSHポートの変更
 例）12345に変更する場合
