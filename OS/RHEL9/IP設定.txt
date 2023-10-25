@@ -6,7 +6,7 @@ ens192  XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX  ethernet  ens192
 lo      YYYYYYYY-YYYY-YYYY-XXXX-YYYYYYYYYYYY  loopback  
 
 ◆IP設定
-nmcli connection modify ens192 ipv4.method manual ipv4.address 192.168.1.10/24 ipv4.gateway 192.168.51.1 ipv4.dns 192.168.51.1 ipv4.dns-search example.com
+例）nmcli connection modify ens192 ipv4.method manual ipv4.address 192.168.1.10/24 ipv4.gateway 192.168.51.1 ipv4.dns 192.168.51.1 ipv4.dns-search example.com
 
-ipv4.method manualというのはDHCPを使用しないという意味です。
+※ipv4.method manualというのはDHCPを使用しないという意味です。
 
