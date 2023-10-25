@@ -53,6 +53,7 @@ SHOW GRANTS FOR '[ユーザー名]'@'localhost';
 # mysqldump -u root -p -x [データベース名] > [ファイル名].sql
 
 ★ダンプデータを移行先にコピー
+（手順省略）
 
 ★移行先サーバーでダンプデータをインポート
 # mysql [データベース名] < [ファイル名].sql
