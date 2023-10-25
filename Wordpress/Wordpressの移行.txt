@@ -1,6 +1,6 @@
 Wordpressの移行
 
-AWS EC2がCentOS7.9のためRockyLinux9.2に移行したのでWordpressの移行についてのメモ。
+AWS EC2をCentOS7.9からRockyLinux9.2に移行したのでWordpressの移行についてのメモ。
 
 ◆事前準備
 移行先Linuxサーバで以下を実施
@@ -67,6 +67,7 @@ wp-content/themes配下に外観テーマのディレクトリがあるのでデ
 
 ★おまけ
 phpのパッケージがいくつか不足しているとメッセージが表示されれば追加でインストールします。
+（管理画面にログインすると確認できます）
 
 終わりです。お疲れさまでした。
 
