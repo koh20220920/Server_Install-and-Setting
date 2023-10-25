@@ -1,0 +1,53 @@
+Rocky Linux 8.6にdockerをインストールしたときの手順です。
+
+◆podmanのアンインストール（podmanはRedHat社が開発したコンテナサービスです。たしかdockerインストールでconflictが起きたと思うので事前に削除します）
+# yum erase podman*
+
+※別にpodmanをそのまま使ってもいいんですが以前の現場でDockerに入れ替えていたのでそのまま覚えちゃいました。
+
+◆docker用リポジトリの追加
+# yum install yum-utils
+# yum-config-manager –add-repo https://download.docker.com/linux/centos/docker-ce.repo
+
+◆dockerのインストール
+# yum install docker-ce docker-ce-cli containerd.io docker-compose-plugin
+
+以下のエラーメッセージが表示される。
+////
+～省略～
+– パッケージ containerd.io-1.6.8-3.1.el8.x86_64 は runc と競合しています。これは runc-1:1.0.3-2.module+el8.6.0+971+69b94baf.x86_64 により提供されます
+– パッケージ containerd.io-1.6.8-3.1.el8.x86_64 は runc を廃止しました。これは runc-1:1.0.3-2.module+el8.6.0+971+69b94baf.x86_64 により提供されます
+– パッケージ containers-common-2:1-27.module+el8.6.0+971+69b94baf.x86_64 には runc が必要ですが、どのプロバイダーからもインストールできません
+– パッケージ containers-common-2:1-35.module+el8.6.0+997+05c9d812.x86_64 には runc が必要ですが、どのプロバイダーからもインストールできません
+– パッケージ containers-common-2:1-28.module+el8.6.0+784+32aef5de.x86_64 はモジュラーフィルタリングに一致しません
+– パッケージ containers-common-2:1-28.module+el8.6.0+972+902006e0.x86_64 はモジュラーフィルタリングに一致しません
+(競合するパッケージを置き換えるには、コマンドラインに ‘–allowerasing’ を追加してみてください または、’–skip-broken’ を追加して、インストール不可のパッケージをスキップしてください または、’–nobest’ を追加して、最適候補のパッケージのみを使用しないでください)
+////
+
+◆nobestオプションを使用して再度dockerをインストール
+# yum install –nobest docker-ce docker-ce-cli containerd.io docker-compose-plugin
+
+以下のエラーメッセージが表示される。
+////
+～省略～
+– パッケージ docker-ce-3:20.10.17-3.el8.x86_64 には containerd.io >= 1.4.1 が必要ですが、どのプロバイダーからもインストールできません
+– パッケージ docker-ce-3:20.10.18-3.el8.x86_64 には containerd.io >= 1.4.1 が必要ですが、どのプロバイダーからもインストールできません
+(競合するパッケージを置き換えるには、コマンドラインに ‘–allowerasing’ を追加してみてください または、’–skip-broken’ を追加して、インストール不可のパッケージをスキップしてください)
+////
+
+◆試しにruncを削除
+# yum erase runc
+
+◆再度、dockerをインストール
+# yum install docker-ce docker-ce-cli containerd.io docker-compose-plugin
+⇒今度は成功
+
+◆dockerの起動と自動起動化
+# systemctl start docker
+# systemctl enable docker
+
+◆hello-worldの確認
+# docker run hello-world
+
+参考URL
+https://docs.docker.com/engine/install/centos/
