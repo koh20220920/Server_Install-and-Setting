@@ -1,5 +1,6 @@
 その他のSSHの設定についてです。
 いずれも /etc/ssh/sshd_configで以下を設定します。
+設定後はsshdを再起動します。
 
 ◆パスワード認証拒否
 PasswordAuthentication no
@@ -12,3 +13,7 @@ PubkeyAuthentication yes
 
 ◆公開鍵登録ファイル
 AuthorizedKeysFile      .ssh/authorized_keys
+
+◆SSHポートの変更
+例）12345に変更する場合
+Port 12345
