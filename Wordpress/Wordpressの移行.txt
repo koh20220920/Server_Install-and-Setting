@@ -17,22 +17,27 @@ https://github.com/koh20220920/Server_Install-and-Setting/blob/main/Apache/Apach
 https://github.com/koh20220920/Server_Install-and-Setting/blob/main/%E8%A8%BC%E6%98%8E%E6%9B%B8/Let's%20Encrypt%E3%81%AB%E3%82%88%E3%82%8B%E3%82%B5%E3%83%BC%E3%83%90%E3%83%BC%E8%A8%BC%E6%98%8E%E6%9B%B8%E3%81%AE%E4%BD%9C%E6%88%90.txt
 
 ◆Wordpressの移行
-★Wordpressファイルの入手、解凍、配置
-・Wordpresのtar.gzファイルをダウンロードして解凍
-・wordpressディレクトリの移動（/var/www/html配下など）
+★Wordpressファイルの入手してサーバーにアップロードします
+
+★Wordpressを解凍、配置します。
+# tar xzvf latest-ja.tar.gz　　　　←★ファイル名にwordpressって付かなくなったんですね。わかりにくいです。でも回答すると wordpressというディレクトリ名になります。
+# mv wordpress /var/www/html　　　　←★移動先はApacheのドキュメントルートなどに合わせる
 
 ★Wordpressコンフィグファイルのリネーム
-# mv wp-config-sample.php wp-config.php
+# mv /var/www/html/wordpress/wp-config-sample.php /var/www/html/wordpress/wp-config.php
 
 ★Wordpressコンフィグの編集
-#vi wp-config.php
+#vi /var/www/html/wordpress/wp-config.php
 以下の項目を移行元からコピペする
 /** WordPress のためのデータベース名 */
 /** MySQL データベースのユーザー名 */
 /** MySQL データベースのパスワード */
 Authentication unique keys and saltsの各項目
 
-★MariaDBにログインしてデータベースを作成（wp-config.phpの情報に合わせる）
+★MariaDBにログイン
+（手順省略）
+
+★MariaDBにデータベースを作成（wp-config.phpの情報に合わせる）
 MariaDB [(none)]> create database [データベース名];
 
 ★MariaDBでユーザーを作成（wp-config.phpの情報に合わせる）
@@ -70,5 +75,4 @@ phpのパッケージがいくつか不足しているとメッセージが表�
 （管理画面にログインすると確認できます）
 
 終わりです。お疲れさまでした。
-
 
