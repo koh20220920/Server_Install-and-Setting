@@ -1,0 +1,32 @@
+ansibleのインストール
+
+◆OSのバージョン確認
+# cat /etc/redhat-release
+Rocky Linux release 9.2 (Blue Onyx)
+#
+
+◆ansibleのインストール
+# dnf install ansible-core.x86_64
+#
+
+◆ansibleのバージョン確認
+# ansible --version
+ansible [core 2.14.2]
+  config file = /etc/ansible/ansible.cfg
+  configured module search path = ['/root/.ansible/plugins/modules', '/usr/share/ansible/plugins/modules']
+  ansible python module location = /usr/lib/python3.11/site-packages/ansible
+  ansible collection location = /root/.ansible/collections:/usr/share/ansible/collections
+  executable location = /usr/bin/ansible
+  python version = 3.11.2 (main, Sep 12 2023, 00:00:00) [GCC 11.3.1 20221121 (Red Hat 11.3.1-4)] (/usr/bin/python3.11)
+  jinja version = 3.1.2
+  libyaml = True
+#
+
+◆インストールディレクトリの確認
+# ll /etc/ansible/
+合計 8
+-rw-r--r--. 1 root root  614  6月 23 02:07 ansible.cfg
+-rw-r--r--. 1 root root 1018  6月 23 02:07 hosts
+drwxr-xr-x. 2 root root    6  6月 23 02:07 roles
+#
+
