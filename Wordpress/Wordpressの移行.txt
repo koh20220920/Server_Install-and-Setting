@@ -27,7 +27,7 @@ AWS EC2がCentOS7.9のためRockyLinux9.2に移行したのでWordpressの移行
 Authentication unique keys and saltsの各項目
 
 ★MariaDBにログインしてデータベースを作成（wp-config.phpの情報に合わせる）
-MariaDB [(none)]> create database [databases名];
+MariaDB [(none)]> create database [データベース名];
 
 ★MariaDBでユーザーを作成（wp-config.phpの情報に合わせる）
 MariaDB [(none)]> create user '[ユーザー名]'@'localhost' identified by '[パスワード]';
