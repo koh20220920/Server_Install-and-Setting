@@ -31,7 +31,6 @@ ansibleはデフォルトでは相手サーバーにrootユーザーでログイ
 become: yes
 
 3.ログイン先サーバーにsudo設定をする
-
 # visudo
 以下の行を追記します。（場所は末尾でOKです）
 ansible        ALL=(ALL)        NOPASSWD: ALL　　　　←★ユーザー名（ansible）は実際のユーザー名に合わせます
