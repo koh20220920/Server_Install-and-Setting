@@ -7,7 +7,7 @@ ansible [core 2.14.2]
 #
 
 ansibleは/etc/ansibleディレクトリができてansible.cfgが作成されます。
-設定はこのファイルを変更します。
+設定項目によってはこのファイルを変更します。
 なお、ansible.cfgを見たところコメント行しかありません。
 ansible.cfgの設定については以下を見ろとのことです。
 https://github.com/ansible/ansible/blob/stable-2.9/examples/ansible.cfg
