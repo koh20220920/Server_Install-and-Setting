@@ -5,4 +5,4 @@ wordpressで記事を書くときにハイフンを2つ連続させると一つ�
 解決方法は &#45;&#45; を記述します。
 
 例）test --hogehoge は以下になります。
-test &#45;&#45; hogehoge
+test &#45;&#45;hogehoge
