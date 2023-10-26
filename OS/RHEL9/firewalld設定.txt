@@ -67,7 +67,7 @@ public (active)
   source-ports:
   icmp-blocks:
   rich rules:
-[root@test02 ~]#
+#
 
 ◆一時的に許可したhttpを削除
 # firewall-cmd --remove-service=http
