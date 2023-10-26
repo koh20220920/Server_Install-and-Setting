@@ -1,0 +1,131 @@
+firewalldの設定方法
+
+◆OSバージョン確認
+# cat /etc/redhat-release
+Rocky Linux release 9.2 (Blue Onyx)
+#
+
+firewalldは一時的な設定と永続的な設定があります。
+一時的な設定・・・OS再起動すると消える
+永続的な設定・・・OS再起動しても消えない
+
+
+◆設定確認（一時的でデフォルトゾーン）
+# firewall-cmd --list-all
+public (active)
+  target: default
+  icmp-block-inversion: no
+  interfaces: ens192
+  sources:
+  services: cockpit dhcpv6-client ssh
+  ports:
+  protocols:
+  forward: yes
+  masquerade: no
+  forward-ports:
+  source-ports:
+  icmp-blocks:
+  rich rules:
+#
+
+◆設定確認（永続的でデフォルトゾーン）
+# firewall-cmd --list-all --permanent
+public
+  target: default
+  icmp-block-inversion: no
+  interfaces:
+  sources:
+  services: cockpit dhcpv6-client ssh
+  ports:
+  protocols:
+  forward: yes
+  masquerade: no
+  forward-ports:
+  source-ports:
+  icmp-blocks:
+  rich rules:
+#
+
+◆一時的にhttpを許可
+# firewall-cmd --add-service=http
+success
+#
+
+◆確認
+# firewall-cmd --list-all
+public (active)
+  target: default
+  icmp-block-inversion: no
+  interfaces: ens192
+  sources:
+  services: cockpit dhcpv6-client http ssh　　　　←★httpが追加されている。httpでアクセスもできました。
+  ports:
+  protocols:
+  forward: yes
+  masquerade: no
+  forward-ports:
+  source-ports:
+  icmp-blocks:
+  rich rules:
+[root@test02 ~]#
+
+◆一時的に許可したhttpを削除
+# firewall-cmd --remove-service=http
+success
+#
+
+◆永続的にhttpを許可
+# firewall-cmd --add-service=http --permanent
+success
+#
+
+◆確認
+# firewall-cmd --list-all --permanent
+public
+  target: default
+  icmp-block-inversion: no
+  interfaces:
+  sources:
+  services: cockpit dhcpv6-client http ssh　　　　←★httpが追加されています。でもこの時点でhttpにアクセスしてもエラーになります。どういうわけかポートは閉じています。
+  ports:
+  protocols:
+  forward: yes
+  masquerade: no
+  forward-ports:
+  source-ports:
+  icmp-blocks:
+  rich rules:
+#
+
+◆適用
+# firewall-cmd --reload　　　　←★永続的の場合、reloadを実施しないと適用されません。
+success
+#
+
+◆永続的に許可したhttpを削除
+# firewall-cmd --remove-service=http --permanent
+success
+#
+
+◆確認
+# firewall-cmd --list-all --permanent
+public
+  target: default
+  icmp-block-inversion: no
+  interfaces:
+  sources:
+  services: cockpit dhcpv6-client ssh　　　　←★httpが削除されています。でもこの時点ではhttpにアクセスできます。
+  ports:
+  protocols:
+  forward: yes
+  masquerade: no
+  forward-ports:
+  source-ports:
+  icmp-blocks:
+  rich rules:
+#
+
+◆適用
+# firewall-cmd --reload　　　　←★永続的の場合、reloadを実施しないと適用されません。
+success
+#
