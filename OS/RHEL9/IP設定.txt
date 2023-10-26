@@ -1,4 +1,4 @@
-Rocky Linux 9のIP設定
+RockyLinux9 のIP設定
 
 ◆OSバージョン確認
 # cat /etc/redhat-release
