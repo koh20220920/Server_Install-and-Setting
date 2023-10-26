@@ -156,17 +156,15 @@ public (active)
 success
 #
 
-◆永続的にTCPの80番ポートを追加
+◆永続的にTCPの80番ポートを追加及び適用
 # firewall-cmd --add-port=80/tcp --permanent
 success
 #
-
-◆適用
 # firewall-cmd --reload
 success
 #
 
-◆永続的に追加した80番ポートを削除
+◆永続的に追加した80番ポートを削除及び適用
 # firewall-cmd --remove-port=80/tcp --permanent
 success
 #
