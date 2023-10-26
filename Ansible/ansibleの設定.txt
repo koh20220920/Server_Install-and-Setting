@@ -1,0 +1,44 @@
+ansibleの設定
+
+◆ansibleのバージョン
+# ansible --version
+ansible [core 2.14.2]
+以下、省略
+#
+
+ansibleは/etc/ansibleディレクトリができてansible.cfgが作成されます。
+設定はこのファイルを変更します。
+なお、ansible.cfgを見たところコメント行しかありません。
+ansible.cfgの設定については以下を見ろとのことです。
+https://github.com/ansible/ansible/blob/stable-2.9/examples/ansible.cfg
+
+◆パスワード認証を使用する
+ansibleはデフォルトではSSH公開鍵認証を使用します。
+でも、パスワード認証を使用したくなる時もあるかと思います。
+その場合は、ansible.cfgに以下の行を設定します。
+
+ask_pass      = True
+
+◆playbookを一般ユーザーで実行する
+ansibleはデフォルトでは相手サーバーにrootユーザーでログインしてplaybookを実行します。
+しかし、セキュリティ上、rootログインを拒否している場合もあるかと思います。
+
+その場合はログイン元とログイン先に同じ一般ユーザーを作成します。
+で、そのユーザーでansible-playbookコマンドを実行します。
+
+
+◆playbookを一般ユーザーで実行してsudo実行する
+上記の「playbookを一般ユーザーで実行する」の実行では一般ユーザー権限しかありません。
+そのためパッケージのインストールなどはできません。
+パッケージインストールにはsudo設定が必要になります。
+手順は以下の2つです。
+
+1.playbookに以下の行を追加する（場所は1行目のhostsのしたぐらいです）
+become: yes
+
+2.ログイン先サーバーにsudo設定をする
+ログイン先サーバーで以下を実行します。
+# visudo
+以下の行を追記します。（場所は末尾でOKです）
+[ユーザー名]        ALL=(ALL)        NOPASSWD: ALL
+
