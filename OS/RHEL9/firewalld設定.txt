@@ -129,3 +129,40 @@ public
 # firewall-cmd --reload　　　　←★永続的の場合、reloadを実施しないと適用されません。
 success
 #
+
+◆一時的にTCPの80番ポートを追加（サービス名ではなくポート番号で設定します）
+# firewall-cmd --add-port=80/tcp
+success
+#
+# firewall-cmd --list-all
+public (active)
+  target: default
+  icmp-block-inversion: no
+  interfaces: ens192
+  sources:
+  services: cockpit dhcpv6-client ssh
+  ports: 80/tcp　　　　←★80/tcpが追加されている。
+  protocols:
+  forward: yes
+  masquerade: no
+  forward-ports:
+  source-ports:
+  icmp-blocks:
+  rich rules:
+#
+
+◆一時的に追加した80番ポートを削除
+# firewall-cmd --remove-port=80/tcp
+success
+#
+
+◆永続的にTCPの80番ポートを追加
+# firewall-cmd --add-port=80/tcp --permanent
+success
+#
+
+◆適用
+# firewall-cmd --reload
+success
+#
+
