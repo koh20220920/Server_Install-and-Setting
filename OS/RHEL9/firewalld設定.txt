@@ -98,7 +98,7 @@ public
 #
 
 ◆適用
-# firewall-cmd --reload　　　　←★永続的の場合、reloadを実施しないと適用されません。
+# firewall-cmd --reload　　　　←★永続的の場合、reloadを実施しないと適用されません。httpでアクセスもできました。
 success
 #
 
@@ -126,7 +126,7 @@ public
 #
 
 ◆適用
-# firewall-cmd --reload　　　　←★永続的の場合、reloadを実施しないと適用されません。
+# firewall-cmd --reload　　　　←★永続的の場合、reloadを実施しないと適用されません。httpにアクセスできなくなりました。
 success
 #
 
