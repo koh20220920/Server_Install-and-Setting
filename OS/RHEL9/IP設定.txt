@@ -1,3 +1,10 @@
+Rocky Linux 9のIP設定
+
+◆OSバージョン確認
+# cat /etc/redhat-release
+Rocky Linux release 9.2 (Blue Onyx)
+#
+
 ◆NetworkManager 接続プロファイルリストの確認
 nmcli connection show
 
