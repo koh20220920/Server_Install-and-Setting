@@ -166,3 +166,11 @@ success
 success
 #
 
+◆永続的に追加した80番ポートを削除
+# firewall-cmd --remove-port=80/tcp --permanent
+success
+#
+# firewall-cmd --reload
+success
+#
+
