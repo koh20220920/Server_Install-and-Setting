@@ -12,8 +12,8 @@ Rocky Linux 8.6にZabbixエージェントをインストールしたときの�
 # systemctl enable zabbix-agent
 
 ◆firewalldにzabbixエージェントのポート追加
-# firewall-cmd –add-port=10050/tcp –zone=public –permanent
-# firewall-cmd –reload
+# firewall-cmd --add-port=10050/tcp --zone=public --permanent
+# firewall-cmd --reload
 ※試した見たけどTCPなんですね。SNMPはUDP使うのに。
 
 ◆Zabbixサーバーの指定
